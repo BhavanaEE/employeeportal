@@ -4,8 +4,11 @@ import com.everest.employee.entities.Employee;
 import com.everest.employee.exceptions.EmployeeNotFoundException;
 import com.everest.employee.repositories.EmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.swing.*;
 import java.util.*;
 
 @RestController
@@ -20,13 +23,16 @@ public class EmployeeController {
     }
 
     @GetMapping(value = "/{id}")
-    public Employee getEmployeeById(@PathVariable Long id) throws EmployeeNotFoundException {
-        return employeeRepository.getEmployeeById(id);
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) throws EmployeeNotFoundException {
+        final Employee employee=employeeRepository.getEmployeeById(id);
+        if(employee!=null) return ResponseEntity.ok(employee);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @PostMapping(value = "")
-    public Employee createEmployee(@RequestBody Employee employee){
-        return employeeRepository.createEmployee(employee);
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
+        final Employee createdEmployee=employeeRepository.createEmployee(employee);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdEmployee);
     }
 
     @PutMapping(value = "/{id}")

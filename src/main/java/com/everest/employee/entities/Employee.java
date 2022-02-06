@@ -4,14 +4,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.naming.Name;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
+@Table(name = "Employee")
+@Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
 public class Employee {
-    private Long EmployeeId;
-    private NameOfEmployee nameOfEmployee;
+    @Id
+    private int employeeId;
+//    private NameOfEmployee nameOfEmployee;
     private String everestEmailId;
     private String personalMailId;
     private String password;
@@ -20,7 +25,7 @@ public class Employee {
     private String designation;
     private int experience;
     private String bio;
-    private Address presentAddress;
-    private Address permanentAddress;
+//    private Address presentAddress;
+//    private Address permanentAddress;
 
 }

@@ -13,9 +13,7 @@ import java.util.Optional;
 public class EmployeeService {
     private final JpaEmployeeRepository jpaEmployeeRepository;
 
-    public Employee updateEmployee(Long id,Employee updateEmployee) throws EmployeeNotFoundException {
-        Optional<Employee> getId = jpaEmployeeRepository.findById(id);
-        if(getId.isEmpty()) throw new EmployeeNotFoundException();
+    public Employee updateEmployee(Long id,Employee updateEmployee){
         return jpaEmployeeRepository.save(updateEmployee);
     }
 }

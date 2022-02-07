@@ -13,7 +13,7 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @PutMapping(value = "/{id}")
-    public Employee updateEmployee(@PathVariable Long id,@RequestBody Employee employee) throws EmployeeNotFoundException {
+    public Employee updateEmployee(@PathVariable Long id,@RequestBody Employee employee){
         return employeeService.updateEmployee(id,employee);
     }
 }

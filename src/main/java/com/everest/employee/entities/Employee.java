@@ -1,10 +1,6 @@
 package com.everest.employee.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-
-import javax.naming.Name;
 import javax.persistence.*;
 import java.time.LocalDate;
 
@@ -14,7 +10,9 @@ import java.time.LocalDate;
 public class Employee {
     @Id
     private Long employeeId;
-//    private NameOfEmployee nameOfEmployee;
+    @OneToOne()
+    @JoinColumn(name = "EmployeeId",referencedColumnName = "EmployeeId")
+    private NameOfEmployee nameOfEmployee;
     private String everestEmailId;
     private String personalMailId;
     private String password;

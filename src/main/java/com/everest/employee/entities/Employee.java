@@ -1,21 +1,19 @@
 package com.everest.employee.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
 
-@Data
+@Setter
+@Getter
 @Entity
 @Table(name = "Employee")
 public class Employee {
     @Id
     private Long EmployeeId;
-//    private NameOfEmployee nameOfEmployee;
+    private String firstName;
+    private String lastName;
     private String everestEmailId;
     private String personalMailId;
     private String password;
@@ -24,7 +22,10 @@ public class Employee {
     private String designation;
     private int experience;
     private String bio;
-//    private Address presentAddress;
-//    private Address permanentAddress;
-
+    @OneToOne()
+    @JoinColumn(name = "EmployeeId",referencedColumnName = "EmployeeId")
+    private Address presentAddress;
+    @OneToOne
+    @JoinColumn(name = "EmployeeId",referencedColumnName = "EmployeeId")
+    private Address permanentAddress;
 }

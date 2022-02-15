@@ -1,13 +1,14 @@
 package com.everest.employee.entities;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Table(name = "Address")
 public class Address {
+    @Id
+    private Long employeeId;
     private String addressLane1;
     private String addressLane2;
     private String city;

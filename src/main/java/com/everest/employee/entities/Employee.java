@@ -1,18 +1,20 @@
 package com.everest.employee.entities;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 
 @Table(name = "Employee")
 @Entity
-@Data
+@Setter
+@Getter
 public class Employee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long employeeId;
-    @OneToOne()
-    @JoinColumn(name = "EmployeeId",referencedColumnName = "EmployeeId")
-    private NameOfEmployee nameOfEmployee;
+    private String firstName;
+    private String lastName;
     private String everestEmailId;
     private String personalMailId;
     private String password;

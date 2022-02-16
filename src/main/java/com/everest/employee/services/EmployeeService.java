@@ -16,6 +16,6 @@ public class EmployeeService {
     private final JpaEmployeeRepository jpaEmployeeRepository;
 
     public List<Employee> getEmployeeByName(String firstName) {
-        return jpaEmployeeRepository.findByFirstName(firstName);
+        return jpaEmployeeRepository.findByFirstNameContaining(firstName);
     }
 }

@@ -1,7 +1,6 @@
 package com.everest.employee.controllers;
 
 import com.everest.employee.entities.Employee;
-import com.everest.employee.models.EmployeesResult;
 import com.everest.employee.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;

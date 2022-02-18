@@ -1,7 +1,7 @@
 package com.everest.employee.exceptions;
 
 public class EmployeeNotFoundException extends Exception{
-    public EmployeeNotFoundException() {
-        super("No Employees found");
+    public EmployeeNotFoundException(String message) {
+        super(message);
     }
 }

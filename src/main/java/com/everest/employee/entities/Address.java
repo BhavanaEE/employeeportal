@@ -2,9 +2,7 @@ package com.everest.employee.entities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Setter
 @Getter
@@ -12,6 +10,8 @@ import javax.persistence.Table;
 @Table(name = "Address")
 public class Address {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long addressId;
     private Long employeeId;
     private String addressLane1;
     private String addressLane2;

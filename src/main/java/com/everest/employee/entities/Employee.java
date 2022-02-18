@@ -23,11 +23,11 @@ public class Employee {
     private String designation;
     private int experience;
     private String bio;
-    @OneToOne()
-    @JoinColumn(name = "EmployeeId",referencedColumnName = "EmployeeId")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "presentAddressId")
     private Address presentAddress;
-    @OneToOne
-    @JoinColumn(name = "EmployeeId",referencedColumnName = "EmployeeId")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "permanentAddressId")
     private Address permanentAddress;
 
 }

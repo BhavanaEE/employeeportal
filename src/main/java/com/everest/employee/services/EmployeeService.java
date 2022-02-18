@@ -3,10 +3,10 @@ package com.everest.employee.services;
 import com.everest.employee.entities.Employee;
 import com.everest.employee.repositories.JpaEmployeeRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
@@ -15,7 +15,7 @@ public class EmployeeService {
 
     private final JpaEmployeeRepository jpaEmployeeRepository;
 
-    public List<Employee> getEmployeeByName(String firstName,String lastName) {
-        return jpaEmployeeRepository.findByFirstNameContainingOrLastNameContaining(firstName,lastName);
+    public Page<Employee> getEmployeeByName(String name, Pageable pageable) {
+        return jpaEmployeeRepository.findByFirstNameContainingOrLastNameContaining(name,name,pageable);
     }
 }

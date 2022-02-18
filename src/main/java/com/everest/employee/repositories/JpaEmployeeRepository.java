@@ -1,10 +1,10 @@
 package com.everest.employee.repositories;
 
 import com.everest.employee.entities.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
 public interface JpaEmployeeRepository extends JpaRepository<Employee,Long> {
-    List<Employee> findByFirstNameContainingOrLastNameContaining(String firstName,String lastName);
+    Page<Employee> findByFirstNameContainingOrLastNameContaining(String firstName, String lastName, Pageable pageable);
 }

@@ -1,23 +1,28 @@
 package com.everest.employee.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 
 @Setter
 @Getter
-@Table(name = "Address")
 @Entity
+@Table(name = "Address")
 public class Address {
     @Id
-    private Long employeeId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long addressId;
+    @NotBlank(message = "Address shouldn't be blank")
     private String addressLane1;
     private String addressLane2;
+    @NotBlank(message = "City shouldn't be blank")
     private String city;
+    @NotBlank(message = "State shouldn't be blank")
     private String state;
+    @NotBlank(message = "Zipcode shouldn't be blank")
     private Long zipcode;
+    @NotBlank(message = "Country shouldn't be blank")
     private String country;
+
 }

@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Setter
 @Getter
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotBlank;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotBlank(message = "Id shouldn't be blank")
+    @NotNull(message = "Id shouldn't be null")
     private Long addressId;
     @NotBlank(message = "Address shouldn't be blank")
     private String addressLane1;
@@ -21,8 +22,7 @@ public class Address {
     private String city;
     @NotBlank(message = "State shouldn't be blank")
     private String state;
-    @NotBlank(message = "Zipcode shouldn't be blank")
-    private Long zipcode;
+    private long zipcode;
     @NotBlank(message = "Country shouldn't be blank")
     private String country;
 

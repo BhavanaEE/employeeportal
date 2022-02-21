@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+
 import com.everest.employee.exceptions.EmployeeNotFoundException;
+
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -49,13 +51,12 @@ public class EmployeeService {
     }
 
     @Transactional(readOnly = true)
-    public Employee getEmployeeById(Long id) throws EmployeeNotFoundException {
+    public Employee getEmployeeById(Long id) {
         Optional<Employee> getById = jpaEmployeeRepository.findById(id);
         if (getById.isEmpty()) throw new EmployeeNotFoundException("No employee found with employee id  " + id);
         return getById.get();
     }
 
-    @Transactional(readOnly = true)
     public ResponseEntity<Employee> deleteEmployee(Long id) {
         Employee employee = jpaEmployeeRepository.findById(id).orElse(null);
         if (employee == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -65,7 +66,17 @@ public class EmployeeService {
 
     @Transactional(readOnly = true)
     public Page<Employee> getEmployeeByName(String name, int page, int pageSize, Sort sort) {
-        Pageable pageable = PageRequest.of(page - 1, pageSize,sort);
-        return jpaEmployeeRepository.findByFirstNameContainingOrLastNameContaining(name,name,pageable);
+        Pageable pageable = PageRequest.of(page - 1, pageSize, sort);
+        return jpaEmployeeRepository.findByFirstNameContainingOrLastNameContaining(name, name, pageable);
+    }
+
+    public Employee updateEmployee(Long id, Employee updateEmployee) {
+        Optional<Employee> byId = jpaEmployeeRepository.findById(id);
+        if (byId.isEmpty()) {
+            throw new EmployeeNotFoundException("Give proper employee id");
+        }
+        Employee employee = byId.get();
+        employee.setEmployeeId(id);
+        return jpaEmployeeRepository.save(updateEmployee);
     }
 }

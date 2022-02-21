@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.time.LocalDate;
 
 @Setter
@@ -23,13 +20,13 @@ public class Employee {
     @NotBlank(message = "Lastname shouldn't be blank")
     private String lastName;
     @NotBlank(message = "Email shouldn't be blank")
-    @Email(message = "Email is not valid",regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@$" + "everest.engineering")
+    @Email(message = "Email is not valid",regexp ="^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "everest.engineering$")
     private String everestEmailId;
     @NotBlank(message = "Mail shouldn't be blank")
     @Email(message = "Email is not valid",regexp = "^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@" + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$")
     private String personalMailId;
     @NotBlank(message = "Password shouldn't be blank")
-    @Min(value = 4)
+    @Size(min = 4,max = 18)
     private String password;
     @NotNull(message = "Date of birth shouldn't be blank")
     private LocalDate dateOfBirth;

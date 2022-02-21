@@ -2,6 +2,7 @@ package com.everest.employee.controllers;
 
 import com.everest.employee.entities.Employee;
 import com.everest.employee.models.EmployeesResult;
+import com.everest.employee.exceptions.EmployeeNotFoundException;
 import com.everest.employee.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,8 +23,13 @@ public class EmployeeController {
     }
 
     @PostMapping(value = "")
-    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee){
+    public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
         Employee newEmployee = employeeService.createEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(newEmployee);
+    }
+
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) throws EmployeeNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeById(id));
     }
 }

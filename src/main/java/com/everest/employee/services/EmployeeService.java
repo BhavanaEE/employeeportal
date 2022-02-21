@@ -12,7 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.everest.employee.exceptions.EmployeeNotFoundException;
 
+import java.util.Optional;
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -43,5 +45,11 @@ public class EmployeeService {
 
     public Employee createEmployee(Employee employee) {
         return jpaEmployeeRepository.save(employee);
+    }
+
+    public Employee getEmployeeById(Long id) throws EmployeeNotFoundException {
+        Optional<Employee> getById = jpaEmployeeRepository.findById(id);
+        if(getById.isEmpty()) throw new EmployeeNotFoundException("No employee found with employee id  "+id);
+        return getById.get();
     }
 }

@@ -13,7 +13,6 @@ import javax.validation.constraints.NotNull;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Id shouldn't be null")
     private Long addressId;
     @NotBlank(message = "Address shouldn't be blank")
     private String addressLane1;

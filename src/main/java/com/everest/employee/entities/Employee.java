@@ -16,7 +16,6 @@ import java.time.LocalDate;
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @NotNull(message = "Employee id shouldn't be null")
     private Long employeeId;
     @NotBlank(message = "Firstname shouldn't be blank")
     private String firstName;

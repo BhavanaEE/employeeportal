@@ -41,4 +41,7 @@ public class EmployeeService {
         return Sort.Direction.ASC;
     }
 
+    public Employee createEmployee(Employee employee) {
+        return jpaEmployeeRepository.save(employee);
+    }
 }

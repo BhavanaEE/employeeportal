@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,9 +49,18 @@ public class EmployeeService {
         return jpaEmployeeRepository.save(employee);
     }
 
+    @Transactional(readOnly = true)
     public Employee getEmployeeById(Long id) throws EmployeeNotFoundException {
         Optional<Employee> getById = jpaEmployeeRepository.findById(id);
-        if(getById.isEmpty()) throw new EmployeeNotFoundException("No employee found with employee id  "+id);
+        if (getById.isEmpty()) throw new EmployeeNotFoundException("No employee found with employee id  " + id);
         return getById.get();
+    }
+
+    @Transactional(readOnly = true)
+    public ResponseEntity<Employee> deleteEmployee(Long id) {
+        Employee employee = jpaEmployeeRepository.findById(id).orElse(null);
+        if (employee == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        jpaEmployeeRepository.deleteById(id);
+        return ResponseEntity.ok(employee);
     }
 }

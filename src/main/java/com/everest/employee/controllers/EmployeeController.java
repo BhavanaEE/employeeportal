@@ -32,4 +32,9 @@ public class EmployeeController {
     public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) throws EmployeeNotFoundException {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeById(id));
     }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id){
+       return employeeService.deleteEmployee(id);
+    }
 }

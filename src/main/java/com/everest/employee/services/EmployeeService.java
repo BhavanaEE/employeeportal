@@ -12,11 +12,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import com.everest.employee.exceptions.EmployeeNotFoundException;
-
 import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 @Transactional
@@ -62,5 +61,11 @@ public class EmployeeService {
         if (employee == null) return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         jpaEmployeeRepository.deleteById(id);
         return ResponseEntity.ok(employee);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<Employee> getEmployeeByName(String name, int page, int pageSize, Sort sort) {
+        Pageable pageable = PageRequest.of(page - 1, pageSize,sort);
+        return jpaEmployeeRepository.findByFirstNameContainingOrLastNameContaining(name,name,pageable);
     }
 }

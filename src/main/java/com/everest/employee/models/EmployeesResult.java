@@ -16,7 +16,7 @@ public class EmployeesResult {
     private boolean hasNext;
     private boolean hasPrevious;
 
-    public EmployeesResult(Page<Employee> employeePage){
+    public EmployeesResult(Page<Employee> employeePage) {
         this.setData(employeePage.getContent());
         this.setTotalElements(employeePage.getTotalElements());
         this.setTotalPages(employeePage.getTotalPages());

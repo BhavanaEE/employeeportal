@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Setter
 @Getter
@@ -20,8 +21,9 @@ public class Address {
     private String city;
     @NotBlank(message = "State shouldn't be blank")
     private String state;
-    @NotBlank(message = "Zipcode shouldn't be blank")
+    @NotNull(message = "Zipcode shouldn't be blank")
     private Long zipcode;
     @NotBlank(message = "Country shouldn't be blank")
     private String country;
+
 }

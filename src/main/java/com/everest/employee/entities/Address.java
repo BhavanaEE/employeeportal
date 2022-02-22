@@ -9,6 +9,8 @@ import javax.validation.constraints.NotNull;
 @Setter
 @Getter
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "Address")
 public class Address {
     @Id

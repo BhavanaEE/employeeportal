@@ -52,7 +52,7 @@ class EmployeeControllerTest {
     }
 
     @Test
-    void shouldFetchAllEmployees() throws Exception {
+    void shouldCreateNewUser() throws Exception {
         given(employeeService.createEmployee(any(Employee.class))).willAnswer((invocation) -> invocation.getArgument(0));
         this.mockMvc.perform(MockMvcRequestBuilders.post("/api/employees")
                         .contentType(MediaType.APPLICATION_JSON)

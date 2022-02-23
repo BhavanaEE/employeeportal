@@ -25,25 +25,8 @@ public class EmployeeService {
     private final JpaEmployeeRepository jpaEmployeeRepository;
 
     @Transactional(readOnly = true)
-    public Page<Employee> getAllEmployees(int page, int pageSize, String[] sortBy) {
-        List<Sort.Order> orders = new ArrayList<>();
-        if (sortBy[0].contains(",")) {
-            for (String sortOrder : sortBy) {
-                String[] sort = sortOrder.split(",");
-                orders.add(new Sort.Order(getSortDirection(sort[1]), sort[0]));
-            }
-        } else {
-            orders.add(new Sort.Order(getSortDirection(sortBy[1]), sortBy[0]));
-        }
-        Pageable pageable = PageRequest.of(page - 1, pageSize, Sort.by(orders));
+    public Page<Employee> getAllEmployees(Pageable pageable) {
         return jpaEmployeeRepository.findAll(pageable);
-    }
-
-    private Sort.Direction getSortDirection(String direction) {
-        if (direction.equals("desc")) {
-            return Sort.Direction.DESC;
-        }
-        return Sort.Direction.ASC;
     }
 
     public Employee createEmployee(Employee employee) {

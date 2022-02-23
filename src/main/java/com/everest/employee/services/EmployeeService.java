@@ -53,7 +53,7 @@ public class EmployeeService {
     @Transactional(readOnly = true)
     public Employee getEmployeeById(Long id) {
         Optional<Employee> getById = jpaEmployeeRepository.findById(id);
-        if (getById.isEmpty()) throw new EmployeeNotFoundException("No employee found with employee id  " + id);
+        if (getById.isEmpty()) { return null;}
         return getById.get();
     }
 
@@ -71,12 +71,7 @@ public class EmployeeService {
     }
 
     public Employee updateEmployee(Long id, Employee updateEmployee) {
-        Optional<Employee> byId = jpaEmployeeRepository.findById(id);
-        if (byId.isEmpty()) {
-            throw new EmployeeNotFoundException("Give proper employee id");
-        }
-        Employee employee = byId.get();
-        employee.setEmployeeId(id);
+        updateEmployee.setEmployeeId(id);
         return jpaEmployeeRepository.save(updateEmployee);
     }
 }

@@ -36,11 +36,16 @@ public class EmployeeController {
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Employee> deleteEmployee(@PathVariable Long id) {
-        return employeeService.deleteEmployee(id);
+        Employee employee = employeeService.getEmployeeById(id);
+        if (employee != null) {
+            employeeService.deleteEmployee(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        }
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @GetMapping(value = "/search")
-    public EmployeesResult findByName(@RequestParam("query") String searchKeyword, @RequestParam(value = "page", defaultValue = "1") int page,@RequestParam(value = "size", defaultValue = "10") int pageSize,@RequestParam(value = "sort", defaultValue = "firstName,asc") String[] sortBy) {
+    public EmployeesResult findByName(@RequestParam("query") String searchKeyword, @RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "10") int pageSize, @RequestParam(value = "sort", defaultValue = "firstName,asc") String[] sortBy) {
         Sort.Direction direction = Sort.Direction.ASC;
         if (sortBy[1].equalsIgnoreCase("desc")) {
             direction = Sort.Direction.DESC;
@@ -51,7 +56,7 @@ public class EmployeeController {
     }
 
     @PutMapping(value = "/{id}")
-    public Employee updateEmployee(@PathVariable Long id,@RequestBody Employee employee) {
-        return employeeService.updateEmployee(id,employee);
+    public Employee updateEmployee(@PathVariable Long id, @RequestBody Employee employee) {
+        return employeeService.updateEmployee(id, employee);
     }
 }

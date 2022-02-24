@@ -18,6 +18,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
@@ -38,7 +39,7 @@ class EmployeeControllerTest {
     @MockBean
     private EmployeeService employeeService;
 
-    private ArrayList<Employee> employees;
+    private List<Employee> employees;
 
     @BeforeEach
     void setUp() {
@@ -71,7 +72,5 @@ class EmployeeControllerTest {
                 .andExpect(jsonPath("$.hasPrevious", equalTo(false)))
                 .andExpect(jsonPath("$.totalPages", equalTo(1)))
                 .andExpect(jsonPath("$.data.size()", is(this.employees.size())));
-
-
     }
 }

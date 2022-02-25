@@ -65,8 +65,7 @@ public class EmployeeService {
     }
 
     @Transactional(readOnly = true)
-    public Page<Employee> getEmployeeByName(String name, int page, int pageSize, Sort sort) {
-        Pageable pageable = PageRequest.of(page - 1, pageSize, sort);
+    public Page<Employee> getEmployeeByName(String name, Pageable pageable) {
         return jpaEmployeeRepository.findByFirstNameContainingOrLastNameContaining(name, name, pageable);
     }
 

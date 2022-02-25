@@ -6,6 +6,8 @@ import com.everest.employee.exceptions.EmployeeNotFoundException;
 import com.everest.employee.services.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.domain.Sort;
@@ -18,8 +20,8 @@ public class EmployeeController {
     private final EmployeeService employeeService;
 
     @GetMapping(value = "")
-    public EmployeesResult getAllEmployees(@RequestParam(value = "page", defaultValue = "1") int page, @RequestParam(value = "size", defaultValue = "10") int pageSize, @RequestParam(value = "sort", defaultValue = "firstName,asc") String[] sortBy) {
-        Page<Employee> allEmployees = employeeService.getAllEmployees(page, pageSize, sortBy);
+    public EmployeesResult getAllEmployees(@PageableDefault(page =0,size =4,sort = {"firstName","lastName"},direction = Sort.Direction.ASC)Pageable pageable) {
+        Page<Employee> allEmployees = employeeService.getAllEmployees(pageable);
         return new EmployeesResult(allEmployees);
     }
 

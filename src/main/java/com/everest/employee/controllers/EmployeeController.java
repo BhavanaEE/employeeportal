@@ -12,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin
 @RequiredArgsConstructor
 @RequestMapping("api/employees")
 public class EmployeeController {
@@ -25,6 +26,10 @@ public class EmployeeController {
 
     @PostMapping(value = "")
     public ResponseEntity<Employee> createEmployee(@RequestBody Employee employee) {
+        Employee employeeByEverestEmailId = employeeService.getEmployeeByEverestEmailId(employee.getEverestEmailId());
+        if(employeeByEverestEmailId!=null){
+            throw new EmployeeNotFoundException("Same email id exists");
+        }
         Employee newEmployee = employeeService.createEmployee(employee);
         return ResponseEntity.status(HttpStatus.CREATED).body(newEmployee);
     }

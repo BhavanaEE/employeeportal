@@ -79,4 +79,8 @@ public class EmployeeService {
         employee.setEmployeeId(id);
         return jpaEmployeeRepository.save(updateEmployee);
     }
+
+    public Employee getEmployeeByEverestEmailId(String everestEmailId) {
+        return jpaEmployeeRepository.findByEverestEmailId(everestEmailId);
+    }
 }

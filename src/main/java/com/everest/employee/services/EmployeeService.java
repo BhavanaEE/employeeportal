@@ -39,7 +39,7 @@ public class EmployeeService {
         return jpaEmployeeRepository.findAll(pageable);
     }
 
-    private Sort.Direction getSortDirection(String direction) {
+    public Sort.Direction getSortDirection(String direction) {
         if (direction.equals("desc")) {
             return Sort.Direction.DESC;
         }
@@ -47,6 +47,10 @@ public class EmployeeService {
     }
 
     public Employee createEmployee(Employee employee) {
+        Optional<Employee> userOptional = jpaEmployeeRepository.findByEverestEmailId(employee.getEverestEmailId());
+        if(userOptional.isPresent()){
+            throw new EmployeeNotFoundException("Employee with email "+ employee.getEverestEmailId()+" already exists");
+        }
         return jpaEmployeeRepository.save(employee);
     }
 

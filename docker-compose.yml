@@ -18,6 +18,10 @@ services:
     ports:
       - 3306:3306
     container_name: db
+    volumes:
+      - db_data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=Bhavs@66
       - MYSQL_DATABASE=employee_test
+volumes:
+  db_data:
